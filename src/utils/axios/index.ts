@@ -1,4 +1,4 @@
-import { createErrorModal, createErrorMsg } from '@/hooks/web/useMessage';
+import { createErrorModal, createErrorMsg, createSuccessMsg } from '@/hooks/web/useMessage';
 import { isString } from 'lodash-es';
 import { checkStatus } from './axiosStatus';
 import { errorData } from './errorConfig';
@@ -20,24 +20,28 @@ const interceptor: AxiosInterceptor = {
     const { data } = res;
     const { errorMessageMode } = options;
     if (data) {
-      if (data.code === -1) {
-        if (errorMessageMode === 'modal') {
-          createErrorModal(data.message);
-        } else if (errorMessageMode === 'message') {
-          createErrorMsg(data.message);
-        }
-        return errorData(res);
-      } else {
-        const { code, data: dataInfo, message } = data;
-        if (!code && !dataInfo && !message) {
-          const toData = {
-            code: 1,
-            data,
-            message: 'ok',
-          };
-          return toData;
-        }
-      }
+      // if (data.code != 10000) {
+      //   if (errorMessageMode === 'modal') {
+      //     createErrorModal(data.message);
+      //   } else if (errorMessageMode === 'message') {
+      //     createErrorMsg(data.message);
+      //   }
+      //   return errorData(res);
+      // }else{
+      //   createSuccessMsg(data.message);
+      // } 
+      
+      // else {
+      //   const { code, data: dataInfo, message } = data;
+      //   if (!code && !dataInfo && !message) {
+      //     const toData = {
+      //       code: 1,
+      //       data,
+      //       message: 'ok',
+      //     };
+      //     return toData;
+      //   }
+      // }
     }
     return data;
   },

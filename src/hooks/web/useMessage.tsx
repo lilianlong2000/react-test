@@ -15,6 +15,10 @@ export function createErrorMsg(msg: string) {
   message.error(msg);
 }
 
+export function createSuccessMsg(msg: string) {
+  message.success(msg);
+}
+
 export function useMessage() {
   return {
     createErrorModal,
